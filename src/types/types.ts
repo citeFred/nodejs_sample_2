@@ -77,7 +77,7 @@ const n: number = object;
 
 
 // Union 타입
-function printId(id: number | string) { // or
+function printId(id: ID) { // or
     if (typeof id === "string") {
         console.log(id.toUpperCase());
     } else {
@@ -86,3 +86,25 @@ function printId(id: number | string) { // or
 }
 printId(10);
 printId("Hello");
+// 타입 별칭으로도 Union 같이 다른 타입들도 커스텀 가능
+type ID = number | string;
+
+// Type Alias & Interface
+function printCoord(point: Point) {
+    console.log("The coordinate's x value is " + point.x);
+    console.log("The coordinate's y value is " + point.y);
+}
+function calulateDistance(point1: Point, point2: Point):number {
+    const locationX = point2.x - point1.x;
+    const locationY = point2.y - point1.y;
+    return Math.sqrt(locationX ** 2 + locationY ** 2 )
+}
+
+printCoord({ x:100, y:100 });
+// 해당 객체의 속성이 같다면,, 하지만 파라미터가 point1,2,3 ... 255까지 늘어난다면 계속해서 중복코드가 늘어남
+
+// 사용자 정의 타입을 사용 할 수 있음
+type Point = {
+    x: number,
+    y: number
+}
